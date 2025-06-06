@@ -1,0 +1,15 @@
+MouseSIS
+combined_on_validation
+Traceback (most recent call last):
+  File "/home/coraldl/EV/MouseSIS/src/third_party/TrackEval/trackeval/eval.py", line 153, in evaluate
+    output_fol = dataset.get_output_fol(tracker)
+  File "/home/coraldl/EV/MouseSIS/src/third_party/TrackEval/trackeval/datasets/_base_dataset.py", line 54, in get_output_fol
+    return os.path.join(self.output_fol, tracker, self.output_sub_fol)
+  File "/home/coraldl/anaconda3/envs/mouse/lib/python3.8/posixpath.py", line 76, in join
+    a = os.fspath(a)
+TypeError: expected str, bytes or os.PathLike object, not NoneType
+
+
+
+
+

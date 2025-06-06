@@ -1,0 +1,29 @@
+path: /home/coraldl/EV/MouseSIS/data
+train:
+  - train_ave/seq08/e2vid
+  - train_ave/seq09/e2vid
+  - train_ave/seq11/e2vid
+  - train_ave/seq13/e2vid
+  - train_ave/seq14/e2vid
+  - train_ave/seq15/e2vid
+  - train_ave/seq17/e2vid
+  - train_ave/seq18/e2vid
+  - train_ave/seq19/e2vid
+  - train_ave/seq20/e2vid
+  - train_ave/seq21/e2vid
+  - train_ave/seq23/e2vid
+  - train_ave/seq24/e2vid
+  - train_ave/seq27/e2vid
+  - train_ave/seq29/e2vid
+  - train_ave/seq30/e2vid
+  - train_ave/seq31/e2vid
+  - train_ave/seq33/e2vid
+
+val:
+  - val_ave/seq12/e2vid
+  - val_ave/seq25/e2vid
+  # … 필요에 따라 추가 …
+
+nc: 1
+names:
+  0: mouse
