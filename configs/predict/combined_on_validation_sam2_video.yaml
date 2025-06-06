@@ -8,7 +8,7 @@ gray_detector:
   yolo_path: ./models/yolo_frame.pt
 
 e2vid_detector:
-  yolo_path: /home/coraldl/EV/MouseSIS/scripts/runs/fine_tune/yolo11n_1280x720/weights/best.pt
+  yolo_path: /scripts/runs/fine_tune/yolo11n_1280x720/weights/best.pt
 
 tracker:
   max_age: 1

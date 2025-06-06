@@ -93,8 +93,7 @@ def visualize_sequence(h5_path, annotation_path, output_dir):
                     for c in range(3):
                         mask_overlay[..., c][mask == 1] = color[c]
 
-            # 원래는 overlay와 마스크를 블렌딩한 후 두 이미지를 붙여 final_img를 만듦
-            # alpha blending 및 concatenate 부분을 제거하고, 마스크만 저장:
+
             final_img = mask_overlay
 
             Image.fromarray(final_img).save(output_dir / f'visualization_{str(i).zfill(5)}.png')
@@ -122,20 +121,20 @@ def parse_args():
         help='Path to the sequence H5 file',
         type=str,
         required=True,
-        default='/home/coraldl/EV/MouseSIS/data/MouseSIS/top/test'
+        default='/data/MouseSIS/top/test'
     )
     parser.add_argument(
         '--annotation_path',
         help='Path to the annotation JSON file',
         type=str,
         required=True,
-        default='/home/coraldl/EV/MouseSIS/data/MouseSIS/train_annotations.json'
+        default='/data/MouseSIS/train_annotations.json'
     )
     parser.add_argument(
         '--output_dir',
         help='Output directory for visualizations',
         type=str,
-        default='/home/coraldl/EV/MouseSIS/data/MouseSIS/Mask_val'
+        default='/data/MouseSIS/Mask_val'
     )
     return parser.parse_args()
 
@@ -143,8 +142,7 @@ def main():
     args = parse_args()
     h5_path = Path(args.h5_path)
     output_dir = Path(args.output_dir)
-    
-    # 만약 h5_path가 디렉토리라면, 해당 디렉토리 내의 모든 h5/hdf5 파일을 처리
+
     if h5_path.is_dir():
         h5_files = sorted(list(h5_path.glob("*.h5")) + list(h5_path.glob("*.hdf5")))
     else:
@@ -162,6 +160,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-#python visualize_events_frames_and_masks.py --h5_path /home/coraldl/EV/MouseSIS/data/MouseSIS/top/train --annotation_path /home/coraldl/EV/MouseSIS/data/MouseSIS/train_annotations.json

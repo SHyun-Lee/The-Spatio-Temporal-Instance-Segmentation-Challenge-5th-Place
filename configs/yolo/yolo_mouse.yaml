@@ -1,4 +1,4 @@
-path: /home/coraldl/EV/MouseSIS/data
+path: /data
 train:
   - train_ave/seq08/e2vid
   - train_ave/seq09/e2vid

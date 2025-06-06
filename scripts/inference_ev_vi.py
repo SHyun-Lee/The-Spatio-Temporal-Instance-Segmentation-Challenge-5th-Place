@@ -10,17 +10,14 @@ import cv2
 import numpy as np
 from pycocotools import mask as mask_utils
 
-# 프로젝트 상위 디렉토리 경로 추가
 sys.path.append(str(Path(__file__).parent.parent))
 
 from src.detection import Sam2YoloDetector, Sam2YoloVideoDetector
 from src.tracker import XMemSort
 import src.utils as utils
 
-# 재현을 위한 시드 고정
 random.seed(0)
 
-# 결과 저장 함수
 def write_into_json_results(json_result, masks, ids, frame_idx, seq_id, instance_ids_list, num_frames):
     for mask, obj_id in zip(masks, ids):
         rle = mask_utils.encode(np.asfortranarray(mask))
@@ -42,7 +39,6 @@ def write_into_json_results(json_result, masks, ids, frame_idx, seq_id, instance
                     pred['segmentations'][frame_idx] = rle
     return json_result, instance_ids_list
 
-# e2vid 프레임 로드 함수
 def load_e2vid_frames(e2vid_dir: Path):
     frames = {}
     if not e2vid_dir.exists():
@@ -57,7 +53,6 @@ def load_e2vid_frames(e2vid_dir: Path):
             frames[idx] = img
     return frames
 
-# e2vid 전용 시퀀스 처리 함수
 def process_sequence_e2vid_only(seq_name: str, split_dir: Path, output_dir: Path, detector, tracker, iou_th: float):
     seq_id = seq_name.replace('seq', '')
     e2vid_dir = split_dir / seq_name / 'e2vid'
@@ -66,26 +61,23 @@ def process_sequence_e2vid_only(seq_name: str, split_dir: Path, output_dir: Path
         print(f"No e2vid frames for {seq_name}")
         return []
 
-    # 1) 프레임 딕셔너리를 리스트로 변환
     fids = sorted(frames_dict.keys())
     all_frames = [frames_dict[fid] for fid in fids]
     num_frames = len(all_frames)
 
-    # 2) detector.run에 전체 리스트 한 번만 호출
     print(f"Running detector on {num_frames} frames for {seq_name}")
     masks_seq, scores = detector.run(all_frames)
     if masks_seq is None:
         print("No detections for entire sequence.")
         return []
 
-    # 3) 시각화 및 추적
     viz = utils.Visualizer(output_dir, save=True)
     instance_ids = []
     json_result = []
 
     for idx, fid in enumerate(fids):
         frame = all_frames[idx]
-        masks = masks_seq[idx]  # 각 프레임의 마스크
+        masks = masks_seq[idx]  
         if masks is None or len(masks) == 0:
             viz.visualize_frame(frame)
             continue

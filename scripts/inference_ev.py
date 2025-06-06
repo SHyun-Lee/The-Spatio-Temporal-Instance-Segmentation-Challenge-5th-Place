@@ -10,7 +10,6 @@ import cv2
 import numpy as np
 from pycocotools import mask as mask_utils
 
-# 프로젝트 상위 디렉토리 경로 추가
 sys.path.append(str(Path(__file__).parent.parent))
 
 from src.detection import Sam2YoloDetector
@@ -18,10 +17,8 @@ from src.detection import Sam2YoloAutoDetector
 from src.tracker import XMemSort
 import src.utils as utils
 
-# 재현을 위한 시드 고정
 random.seed(0)
 
-# 결과 저장 함수
 def write_into_json_results(json_result, masks, ids, frame_idx, seq_id, instance_ids_list, num_frames):
     for mask, obj_id in zip(masks, ids):
         rle = mask_utils.encode(np.asfortranarray(mask))
@@ -43,7 +40,6 @@ def write_into_json_results(json_result, masks, ids, frame_idx, seq_id, instance
                     pred['segmentations'][frame_idx] = rle
     return json_result, instance_ids_list
 
-# e2vid 프레임 로드 함수
 def load_e2vid_frames(e2vid_dir: Path):
     frames = {}
     if not e2vid_dir.exists():
@@ -58,7 +54,6 @@ def load_e2vid_frames(e2vid_dir: Path):
             frames[idx] = img
     return frames
 
-# e2vid 전용 시퀀스 처리 함수
 def process_sequence_e2vid_only(seq_name: str, split_dir: Path, output_dir: Path, detector, tracker, iou_th: float):
     seq_id = seq_name.replace('seq', '')
     e2vid_dir = split_dir / seq_name / 'e2vid'

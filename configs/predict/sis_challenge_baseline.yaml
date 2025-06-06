@@ -5,7 +5,7 @@ common:
   sequence_ids: [10, 16, 22, 26, 28, 32]
 
 e2vid_detector:
-  yolo_path: /home/coraldl/EV/MouseSIS/scripts/runs/fine_tune/yolo11n_ave/weights/best.pt
+  yolo_path: /scripts/runs/fine_tune/yolo11n_ave/weights/best.pt
 
 tracker:
   max_age: 1
