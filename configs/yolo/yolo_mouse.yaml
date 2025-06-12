@@ -22,7 +22,6 @@ train:
 val:
   - val_ave/seq12/e2vid
   - val_ave/seq25/e2vid
-  # … 필요에 따라 추가 …
 
 nc: 1
 names:
